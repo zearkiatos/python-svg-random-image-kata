@@ -33,8 +33,15 @@ def create_image(figures: dict) -> None:
     file.write("<svg height='500px' version='1.1' width='500px' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>")
     for figure in figures:
         redBg, greenBg, blueBg = figure['internal_color']
-        file.write("<rect fill='rgb("+str(redBg)+","+str(greenBg)+","+str(blueBg)+")'")
-
+        redStroke, greenStroke, blueStroke = figure['line_color']
+        width, height = figure['size']
+        positionX, positionY = figure['position']
+        rotationX, rotationY, rotationZ = figure['rotation']
+        thickness = figure['thickness']
+        cornerX, cornerY = figure['corner']
+        file.write("<rect fill='rgb("+str(redBg)+","+str(greenBg)+","+str(blueBg)+")' height='"+str(height) +
+                   "' rx='"+str(cornerX)+"' ry='"+str(cornerY)+"' stroke='rgb("+str(redStroke)+","+str(greenStroke)+","+str(blueStroke)+")' stroke-width='"+str(thickness)+"px' transform='rotation("+str(rotationX)+","+str(rotationY)+","+str(rotationZ)+")' width='"+str(width)+"' x='"+str(positionX)+"' y='"+str(positionY)+"' />")
+    file.write("</svg>")
 
 
 def generate_image() -> None:
@@ -55,5 +62,6 @@ def generate_image() -> None:
         count += 1
 
     create_image(figures)
+
 
 generate_image()
